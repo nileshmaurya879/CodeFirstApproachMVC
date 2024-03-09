@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CodeFirstApproachMVC.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Student Management</h3>
+
+<p>
+    <button class="btn btn-primary"><a asp-action="Create" style="color:white;">Create New</a></button>
+</p>
+@{
+    if(TempData["inserted_data"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Successfully </strong> @TempData["inserted_data"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["updated_data"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Successfully </strong> @TempData["updated_data"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["deleted_data"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Successfully </strong> @TempData["deleted_data"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
+<table class="table table-dark table-bordered table-hover table-striped" style="border-collapse: collapse; width: 100%; border-radius: 10px; overflow: hidden;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+               <span>Action</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
